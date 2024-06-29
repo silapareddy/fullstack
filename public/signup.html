@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="transparent-header">
+        <h1>Welcome to Our Service</h1>
+    </header>
+    <div class="container">
+        <h2>Signup</h2>
+        <span ">Register If you are New User</span> <br><br>
+        
+        <form id="signupForm" action="/signupSubmit" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="signupUsername" name="username" required>
+            <label for="email">Email:</label>
+            <input type="email" id="signupEmail" name="email" required>
+            <label for="password">Password:</label>
+            <input type="password" id="signupPassword" name="password" required>
+            <button type="submit">Sign Up</button>
+            <div>
+                Already have An Acoount? <a href="login.html" style="text-decoration: rgb(0, 0, 0);">Login</a>
+            </div>
+        </form>
+    </div>
+    <script src="app.js"></script>
+    
+</body>
+</html>

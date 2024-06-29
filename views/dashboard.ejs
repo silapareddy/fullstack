@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NASA News</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background: url(nasa2.webp) no-repeat center fixed;
+        background-size: cover;
+      }
+      h1 {
+        color: #333;
+      }
+      #news-container {
+        max-width: 800px;
+        width: 100%;
+        padding: 20px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+      }
+      .news-item {
+        border-bottom: 1px solid #ddd;
+        padding: 10px 0;
+      }
+      .news-item:last-child {
+        border-bottom: none;
+      }
+      .news-title {
+        font-size: 18px;
+        color: #02060b;
+        margin: 0;
+      }
+      .news-description {
+        font-size: 14px;
+        color: #555;
+      }
+      .news-date {
+        font-size: 12px;
+        color: #888;
+      }
+      #fetch-news-btn {
+        padding: 10px 20px;
+        margin-top: 60px;
+        border: none;
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      #fetch-news-btn:hover {
+        background-color: #0056b3;
+      }
+      .transparent-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.5); /* Semi-transparent background */
+    text-align: center;
+    padding: 10px 0;
+    z-index: 2;
+}
+
+.transparent-header h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+    </style>
+  </head>
+  <body><header class="transparent-header">
+    <h1>Welcome to Our Service</h1>
+    <form action="/logout" method="get" style="float: right;">
+        <button type="submit">Logout</button><br></form>
+</header>
+          <button id="fetch-news-btn">Get Exclusive News</button>
+    <div id="news-container">
+
+    </div>
+    <script>
+      async function fetchNasaNews() {
+        const response = await fetch(
+          "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&count=5"
+        );
+        const news = await response.json();
+        const newsContainer = document.getElementById("news-container");
+        newsContainer.innerHTML = ""; // Clear previous news
+
+        news.forEach((item) => {
+          const newsItem = document.createElement("div");
+          newsItem.className = "news-item";
+
+          const title = document.createElement("h2");
+          title.className = "news-title";
+          title.textContent = item.title;
+
+          const date = document.createElement("p");
+          date.className = "news-date";
+          date.textContent = new Date(item.date).toDateString();
+
+          const description = document.createElement("p");
+          description.className = "news-description";
+          description.textContent = item.explanation;
+
+          newsItem.appendChild(title);
+          newsItem.appendChild(date);
+          newsItem.appendChild(description);
+          newsContainer.appendChild(newsItem);
+        });
+      }
+
+      document
+        .getElementById("fetch-news-btn")
+        .addEventListener("click", fetchNasaNews);
+    </script>
+  </body>
+</html>
